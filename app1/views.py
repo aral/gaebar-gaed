@@ -12,6 +12,7 @@ from django.http import HttpResponseRedirect
 from app1 import models as app1_models
 from app2 import models as app2_models
 
+from app1 import consts
 
 
 def index(request):

@@ -1,7 +1,10 @@
+import logging
+
 from appengine_django.models import BaseModel
 from google.appengine.ext import db
 
-import logging
+from app1 import consts
+
 
 """
 The models here are used to test the following cases:
