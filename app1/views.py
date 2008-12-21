@@ -96,6 +96,10 @@ def populate_datastore(request):
 	# To test all other properties.
 	all_types_1 = app1_models.AllOtherTypes()
 	all_types_1.put()
+	
+	# Populate app2_models
+	simple = app2_models.Simple()
+	simple.put()
 		
 	return HttpResponse('Successfully populated the datastore.')
 		
@@ -231,7 +235,20 @@ def run_tests(request):
 			return err('AllOtherTypes test fail: %s' % test[0])
 	
 	# Test app2_models
-	# TODO
+	try:
+		
+		simples = app2_models.Simple.all().fetch(10)
+		num_simples = len(simples)
+		if not num_simples == 1:
+			return err('There should only be one app2_models.Simple entity, instead there are %d.' % num_simples)
+	
+		simple = simples[0]
+		if not simple.life_is_like == 'a box of chocolates':
+			return err('Life is not like a box of chocolates.')
+
+	except:
+
+		return err('Exception raised while trying to test app2_models.')
 	
 	return HttpResponse('All tests ran successfully.')
 

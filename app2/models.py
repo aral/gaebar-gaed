@@ -1,4 +1,6 @@
 from appengine_django.models import BaseModel
 from google.appengine.ext import db
 
-# Create your models here.
+class Simple(db.Model):
+	life_is_like = db.StringProperty(default='a box of chocolates')
+

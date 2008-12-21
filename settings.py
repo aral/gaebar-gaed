@@ -121,4 +121,13 @@ GAEBAR_SERVERS = {
      # Other servers...
 }
 
-GAEBAR_MODELS = ()
+GAEBAR_MODELS = (
+     (
+          'app1.models', 
+          (u'Profile', u'GoogleAccount', u'AllOtherTypes',),
+     ),
+     (
+          'app2.models', 
+          (u'Simple',),
+     ),
+)
