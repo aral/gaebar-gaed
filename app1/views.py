@@ -149,7 +149,7 @@ def run_tests(request):
 		
 		# Test number of items.
 		if not num_arals_friends == 2:
-			return err('ListProperty test fail. arals_friends should be 2, instead we got ' + str(num_arals_friends))
+			return err('ListProperty test fail. arals_friends should be 2, instead we got %d.' + num_arals_friends)
 			
 		# Test type of items.
 		for arals_friend in arals_friends:
@@ -174,8 +174,42 @@ def run_tests(request):
 		return err('ListProperty test fail. Exception encountered while referencing aral.friends.')
 
 
+	# Test all other datatypes
+	all_other_types = app1_models.AllOtherTypes.all().fetch(10)
+
+	# Make sure that there is just one entry
+	num_all_other_types_entities = len(all_other_types)
+	if not num_all_other_types_entities == 1:
+		return err('AllOtherTypes test fail. There should be 1 entity, instead there are %d.' % num_all_other_types_entities)
+	t = all_other_types[0]
 	
+	all_other_tests = (
+		('StringProperty', t.string_property, consts.STRING_PROPERTY),
+		('BooleanProperty', t.boolean_property, consts.BOOLEAN_PROPERTY),
+		('IntegerProperty', t.integer_property, consts.INTEGER_PROPERTY),
+		('FloatProperty', t.float_property, consts.FLOAT_PROPERTY),
+		('DateTimeProperty', t.date_time_property, consts.DATE_TIME_PROPERTY),
+		('DateProperty', t.date_property, consts.DATE_PROPERTY),
+		('TimeProperty', t.time_property, consts.TIME_PROPERTY),
+		('ListProperty', t.list_property, consts.LIST_PROPERTY),
+		('StringListProperty', t.string_list_property, consts.STRING_LIST_PROPERTY),
+		('BlobProperty', t.blob_property, consts.BLOB_PROPERTY),
+		('TextProperty', t.text_property, consts.TEXT_PROPERTY),
+		('CategoryProperty', t.category_property, consts.CATEGORY_PROPERTY),
+		('LinkProperty', t.link_property, consts.LINK_PROPERTY),
+		('EmailProperty', t.email_property, consts.EMAIL_PROPERTY),
+		('GeoPtProperty', t.geo_pt_property, consts.GEO_PT_PROPERTY),
+		('IMProperty', t.im_property, consts.IM_PROPERTY),
+		('PhoneNumberProperty', t.phone_number_property, consts.PHONE_NUMBER_PROPERTY),
+		('PostalAddressProperty', t.postal_address_property, consts.POSTAL_ADDRESS_PROPERTY),
+		('RatingProperty', t.rating_property, consts.RATING_PROPERTY),
+	)
 	
+	for test in all_other_tests:
+		if not test[1] == test[2]:
+			return err('AllOtherTests test fail: %s' % test[0])
+	
+	# TODO: Test app2_models
 	
 	
 	return HttpResponse('All tests ran successfully.')
