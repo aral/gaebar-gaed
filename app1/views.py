@@ -111,24 +111,38 @@ def run_tests(request):
 	
 	error_message = None
 	
+	# Test general state of the datastore
+	try:
+		profiles = app1_models.Profile.all().fetch(10)
+		google_accounts = app1_models.GoogleAccount.all().fetch(10)
+		others = app1_models.AllOtherTypes.all().fetch(10)
+		
+		len_tests = (('Profile', profiles, 3), ('GoogleAccount', google_accounts, 2), ('AllOtherTypes', others, 1),)
+
+		for len_test in len_tests:
+			if not len(len_test[1]) == len_test[2]:
+				return err('Wrong number of entities in model %s.' % len_test[0])
+	except:
+		return err('Exception raised while trying to test lengths of the models.')
+	
 	# Test get Stephanie.
 	stephanie_test = test_get_stephanie()
 	if not stephanie_test[0]:
-		return error_message(stephanie_test[1])
+		return err(stephanie_test[1])
 	else:
 		stephanie = stephanie_test[1]
 
 	# Test get Aral.
 	aral_test = test_get_aral()
 	if not aral_test[0]:
-		return error_message(aral_test[1])
+		return err(aral_test[1])
 	else:
 		aral = aral_test[1]
 
 	# Test get Paul.
 	paul_test = test_get_paul()
 	if not paul_test[0]:
-		return error_message(paul_test[1])
+		return err(paul_test[1])
 	else:
 		paul = paul_test[1]
 	
@@ -172,30 +186,23 @@ def run_tests(request):
 			
 		# Test that they are actually the keys for the right entities.
 		stephanie_key = arals_friends[0]
-		paul_key = arals_friends[0]	
+		paul_key = arals_friends[1]	
 		
 		stephanie_from_key = app1_models.Profile.get(stephanie_key)
-		# paul_from_key = app1_models.Profile.get(paul_key)
+		paul_from_key = app1_models.Profile.get(paul_key)
 		
 		if not (stephanie_from_key.full_name == stephanie.full_name):
 			return err('ListProperty test fail. stephanie_from_key.full_name not == stephanie.full_name.')
 		
-		# if not (paul_from_key.full_name == paul.full_name):
-		# 	return err('ListProperty test fail. paul_from_key.full_name not == paul.full_name.')
-			
+		if not (paul_from_key.full_name == paul.full_name):
+		 	return err('ListProperty test fail. paul_from_key.full_name not == paul.full_name.')
 			
 	except:
 		return err('ListProperty test fail. Exception encountered while referencing aral.friends.')
 
 
 	# Test all other datatypes
-	all_other_types = app1_models.AllOtherTypes.all().fetch(10)
-
-	# Make sure that there is just one entry
-	num_all_other_types_entities = len(all_other_types)
-	if not num_all_other_types_entities == 1:
-		return err('AllOtherTypes test fail. There should be 1 entity, instead there are %d.' % num_all_other_types_entities)
-	t = all_other_types[0]
+	t = app1_models.AllOtherTypes.all().fetch(1)[0]
 	
 	all_other_tests = (
 		('StringProperty', t.string_property, consts.STRING_PROPERTY),
@@ -221,10 +228,10 @@ def run_tests(request):
 	
 	for test in all_other_tests:
 		if not test[1] == test[2]:
-			return err('AllOtherTests test fail: %s' % test[0])
+			return err('AllOtherTypes test fail: %s' % test[0])
 	
-	# TODO: Test app2_models
-	
+	# Test app2_models
+	# TODO
 	
 	return HttpResponse('All tests ran successfully.')
 

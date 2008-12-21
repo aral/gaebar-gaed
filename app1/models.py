@@ -48,7 +48,7 @@ class AllOtherTypes(db.Model):
 	date_time_property = db.DateTimeProperty(default=consts.DATE_TIME_PROPERTY)
 	date_property = db.DateProperty(default=consts.DATE_PROPERTY)
 	time_property = db.TimeProperty(default=consts.TIME_PROPERTY)
-	list_property = db.ListProperty(int, consts.LIST_PROPERTY)
+	list_property = db.ListProperty(int, default=consts.LIST_PROPERTY)
 	string_list_property = db.StringListProperty(default=consts.STRING_LIST_PROPERTY)
 	blob_property = db.BlobProperty(default=consts.BLOB_PROPERTY)
 	text_property = db.TextProperty(default=consts.TEXT_PROPERTY)
