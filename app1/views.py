@@ -1,10 +1,15 @@
 import logging
 import sys
+import os
 
 from google.appengine.api import users
 from google.appengine.ext import db
 
 from google.appengine.api import datastore_types
+
+from django.db import connection
+from django.core.management import call_command
+
 
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -47,6 +52,14 @@ def populate_datastore(request):
 	"""
 	if not users.is_current_user_admin():
 		return HttpResponseRedirect('/?auth=False')
+
+	# Flush the datastore before starting to make sure that the datastore is 
+	# exactly as we want it to be, without duplicate entries, etc. 
+	# (Based on appengine_django.management.commands.flush.py).
+	# Note: requires hack from http://aralbalkan.com/1440 to re-enable os.remove on the local SDK.
+	os.remove = os.old_remove
+	connection.flush()
+	del os.remove
 		
 	user = users.get_current_user()
 			
