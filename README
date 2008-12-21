@@ -1,3 +1,11 @@
+Gebar Google App Engine Helper for Django Test App
+==================================================
+
+Contains functional tests for Gaebar running on Google App Engine.
+
+Note: In development.
+
+
 GOOGLE APP ENGINE HELPER FOR DJANGO
 ===================================
 
