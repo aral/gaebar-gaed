@@ -1,10 +1,23 @@
+Gaebar (Google App Engine Backup and Restore) Beta 1
+====================================================
+
+A Naklab™ production sponsored by the <head> web conference - http://headconference.com
+
+Copyright (c) 2009 Aral Balkan. http://aralbalkan.com
+
+Released under the GNU GPL v3 License. See license.txt for the full license or read it here:
+http://www.gnu.org/licenses/gpl-3.0-standalone.html
+
 Gebar Google App Engine Helper for Django Test App
-==================================================
+--------------------------------------------------
 
 Contains functional tests for Gaebar running on Google App Engine.
 
+Note: Ancestor relationships are not supported. Expando properties are not supported. (If you would like to test these out and/or add this functionality before I get round to it, please get in touch!)
+
 Note: In development.
 
+* * * 
 
 GOOGLE APP ENGINE HELPER FOR DJANGO
 ===================================
