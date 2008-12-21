@@ -4,35 +4,38 @@ from google.appengine.ext import db
 import logging
 
 """
-Test cases covered:
+The models here are used to test the following cases:
 
-1. All datastore types
-
-2. Reference keys
-
-3. Entities with regular keys
-
-4. Entities with named keys
-
-5. ListProperty of keys
-
-6. Ancestor relationships
-
+	* Serialization/deserialization of all datastore types
+	* Reference keys and SelfReference keys.
+	* Entities with regular keys and named keys
+	* ListProperty of keys
+	* Ancestor relationships - TODO
 
 """
 
-class FirstModel(db.Model):
+class Profile(db.Model):
 	"""
-	Used in test 2 (reference keys).
+	Used to test db.SelfReferenceProperty and db.ListProperty of Keys.
+	
+	"""
+	full_name = db.StringProperty(default="Aral Balkan")
+	in_relationship_with = db.SelfReferenceProperty()
+	friends = db.ListProperty(db.Key)
+
+
+class GoogleAccount(db.Model):
+	"""
+	Used to test db.UserProperty and db.ReferenceProperty.
 
 	"""
-	string_property = db.StringProperty(default="Herbert")
+	user = db.UserProperty()
+	profile = db.ReferenceProperty(Profile, collection_name="google_accounts")
 
-
-
-class AllTypes(db.Model):
+		
+class AllOtherTypes(db.Model):
 	"""
-	Used in test 1 (all datastore types).
+	Used to test that all other data types are serialized/deserialized correctly.
 	
 	"""
 	string_property = db.StringProperty(default="A lovely string.")
@@ -44,19 +47,15 @@ class AllTypes(db.Model):
 	time_property = db.TimeProperty(auto_now_add=True)
 	list_property = db.ListProperty(int, default=[1,2,3])
 	string_list_property = db.StringListProperty(default=['hello', 'world'])
-	reference_property = db.ReferenceProperty(FirstModel)
-	self_reference_property = db.SelfReferenceProperty()
-	user_property = db.UserProperty()
 	blob_property = db.BlobProperty(default=db.Blob(open('images/pink-gae.png').read()))
 	text_property = db.TextProperty(default="Another lovely string.")
 	category_property = db.CategoryProperty(default=db.Category("kittens"))
-	link_property = db.LinkProperty('http://aralbalkan.com')
+	link_property = db.LinkProperty(default=db.Link('http://aralbalkan.com'))
 	email_property = db.EmailProperty(default='me@somewhere.com')
 	geo_pt_property = db.GeoPtProperty(default=db.GeoPt(50.831096,-0.129776))
 	im_property = db.IMProperty(default=db.IM("http://example.com/", "Larry97"))
 	phone_number_property = db.PhoneNumberProperty(default=db.PhoneNumber("1 (206) 555-1212"))
 	postal_address_property = db.PostalAddressProperty(default=db.PostalAddress("1600 Ampitheater Pkwy., Mountain View, CA"))
-	rating_property = db.RatingProperty(97)
+	rating_property = db.RatingProperty(default=97)
 	
 
-	
