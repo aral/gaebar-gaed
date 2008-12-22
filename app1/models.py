@@ -61,6 +61,11 @@ class AllOtherTypes(db.Model):
 	postal_address_property = db.PostalAddressProperty(default=consts.POSTAL_ADDRESS_PROPERTY)
 	rating_property = db.RatingProperty(default=consts.RATING_PROPERTY)
 	
-
-
+	
+class PlasticMan(db.Expando):
+	"""
+	Used to test Expandos.
+	
+	"""
+	goggles = db.BooleanProperty(default=True)
 

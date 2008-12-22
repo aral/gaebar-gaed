@@ -124,7 +124,7 @@ GAEBAR_SERVERS = {
 GAEBAR_MODELS = (
      (
           'app1.models', 
-          (u'Profile', u'GoogleAccount', u'AllOtherTypes',),
+          (u'Profile', u'GoogleAccount', u'AllOtherTypes', u'PlasticMan'),
      ),
      (
           'app2.models', 

@@ -39,8 +39,8 @@ def index(request):
 				<ol>
 					<li><a href="http://localhost:8080/populate-datastore/">Populate the datastore on 8080</a></li>
 					<li><a href="http://localhost:8080/run-tests">Run tests on 8080</a></li>
-					<li><a href="http://localhost:8080/gaebar">Backup datastore from port 8080</a></li>
-					<li><a href="http://localhost:8000/gaebar">Restore datastore to port 8000</a></li>
+					<li><a href="http://localhost:8080/gaebar/">Backup datastore from port 8080</a></li>
+					<li><a href="http://localhost:8000/gaebar/">Restore datastore to port 8000</a></li>
 					<li><a href="http://localhost:8000/run-tests">Run tests on 8000</a></li>
 				</ol>
 			</p>
@@ -110,10 +110,15 @@ def populate_datastore(request):
 	all_types_1 = app1_models.AllOtherTypes()
 	all_types_1.put()
 	
+	# To test Expando.
+	plasticMan = app1_models.PlasticMan()
+	plasticMan.secret_identity = "Eel O'Brian"
+	plasticMan.put()
+	
 	# Populate app2_models
 	simple = app2_models.Simple()
 	simple.put()
-		
+			
 	return HttpResponse('Successfully populated the datastore.')
 		
 
@@ -247,6 +252,17 @@ def run_tests(request):
 	for test in all_other_tests:
 		if not test[1] == test[2]:
 			return err('AllOtherTypes test fail: %s' % test[0])
+	
+	# Test Expando
+	try:
+		plasticMan = app1_models.PlasticMan.all().get()
+		if not plasticMan.goggles == True:
+			return err('Expando regular property error. goggles should be True.')
+		if not plasticMan.secret_identity == "Eel O'Brian":
+			return err('Expando dynamic property error. secret_identity error.')
+	except:
+		return err('Exception encountered while trying to query Expando Plastic Man.')
+
 	
 	# Test app2_models
 	try:
