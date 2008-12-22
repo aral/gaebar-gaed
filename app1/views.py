@@ -32,7 +32,20 @@ def index(request):
 		account_link_url = users.create_logout_url('/')
 		account_link_label = 'Sign out.'
 		
-		response += '<p>Welcome, administrator!</p><p><a href="/populate-datastore/">Populate the datastore.</a></p>'
+		response += """
+			<p><strong>Welcome, administrator!</strong></p>
+			<p>Run local server at http://localhost:8000/. "Remote" server at http://localhost:8080/.</p>
+			<p>
+				<ol>
+					<li><a href="http://localhost:8080/populate-datastore/">Populate the datastore on 8080</a></li>
+					<li><a href="http://localhost:8080/run-tests">Run tests on 8080</a></li>
+					<li><a href="http://localhost:8080/gaebar">Backup datastore from port 8080</a></li>
+					<li><a href="http://localhost:8000/gaebar">Restore datastore to port 8000</a></li>
+					<li><a href="http://localhost:8000/run-tests">Run tests on 8000</a></li>
+				</ol>
+			</p>
+			
+		"""
 		
 	else:
 		account_link_url = users.create_login_url('/')
