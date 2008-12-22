@@ -120,8 +120,9 @@ def run_tests(request):
 		profiles = app1_models.Profile.all().fetch(10)
 		google_accounts = app1_models.GoogleAccount.all().fetch(10)
 		others = app1_models.AllOtherTypes.all().fetch(10)
+		simple = app2_models.Simple.all().fetch(10)
 		
-		len_tests = (('Profile', profiles, 3), ('GoogleAccount', google_accounts, 2), ('AllOtherTypes', others, 1),)
+		len_tests = (('Profile', profiles, 3), ('GoogleAccount', google_accounts, 2), ('AllOtherTypes', others, 1), ('Simple', simple, 1))
 
 		for len_test in len_tests:
 			if not len(len_test[1]) == len_test[2]:
