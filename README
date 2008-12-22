@@ -11,17 +11,11 @@ http://www.gnu.org/licenses/gpl-3.0-standalone.html
 Gebar Google App Engine Helper for Django Test App
 --------------------------------------------------
 
-Contains functional tests for Gaebar running on Google App Engine.
+Functional tests for Gaebar running on Google App Engine Helper-based Django app.
 
-Ancestor relationships are not supported. Quite frankly, I haven't gotten my head around the whole ancestor thing at all. I'm going to look into it again today to see if I can't implement it.
-
-Expandos are in the process of being implemented.
-
-Feedback and patches are always welcome! :)
-
-Note: In heavy development.
 
 * * * 
+
 
 GOOGLE APP ENGINE HELPER FOR DJANGO
 ===================================
