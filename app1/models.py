@@ -69,3 +69,27 @@ class PlasticMan(db.Expando):
 	"""
 	goggles = db.BooleanProperty(default=True)
 
+
+class GrandFather(db.Model):
+	"""
+	Used to test ancestor relationships.
+
+	"""
+	name = 'Time'
+
+	
+class Father(db.Model):
+	"""
+	Used to test ancestor relationships.
+
+	"""
+	name = 'Ted'
+
+	
+class Child(db.Model):
+	"""
+	Used to test ancestor relationships.
+
+	"""
+	name = 'Ellie Grace'	
+	

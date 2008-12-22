@@ -115,6 +115,16 @@ def populate_datastore(request):
 	plasticMan.secret_identity = "Eel O'Brian"
 	plasticMan.put()
 	
+	# To test ancestors
+	grandFather = app1_models.GrandFather()
+	grandFather.put()
+	
+	father = app1_models.Father(parent=grandFather)
+	father.put()
+	
+	child = app1_models.Child(parent=father)
+	child.put()
+	
 	# Populate app2_models
 	simple = app2_models.Simple()
 	simple.put()
@@ -138,15 +148,20 @@ def run_tests(request):
 		profiles = app1_models.Profile.all().fetch(10)
 		google_accounts = app1_models.GoogleAccount.all().fetch(10)
 		others = app1_models.AllOtherTypes.all().fetch(10)
+		grandFather = app1_models.GrandFather.all().fetch(10)
+		father = app1_models.Father.all().fetch(10)
+		child = app1_models.Child.all().fetch(10)
 		simple = app2_models.Simple.all().fetch(10)
 		
-		len_tests = (('Profile', profiles, 3), ('GoogleAccount', google_accounts, 2), ('AllOtherTypes', others, 1), ('Simple', simple, 1))
+		len_tests = (('Profile', profiles, 3), ('GoogleAccount', google_accounts, 2), ('AllOtherTypes', others, 1), ('GrandFather', grandFather, 1), ('Father', father, 1), ('Child', child, 1), ('Simple', simple, 1), )
 
 		for len_test in len_tests:
 			if not len(len_test[1]) == len_test[2]:
 				return err('Wrong number of entities in model %s.' % len_test[0])
-	except:
+
+	except:		
 		return err('Exception raised while trying to test lengths of the models.')
+	
 	
 	# Test get Stephanie.
 	stephanie_test = test_get_stephanie()
@@ -263,6 +278,27 @@ def run_tests(request):
 	except:
 		return err('Exception encountered while trying to query Expando Plastic Man.')
 
+	# Test ancestors
+	try:
+		grandFather = app1_models.GrandFather.all().get()
+		father = app1_models.Father.all().get()
+		child = app1_models.Child.all().get()
+		
+		if not type(child.parent()) == app1_models.Father:
+			return err("Ancestor error: Child's parent is not Father.")
+		
+		if not type(father.parent()) == app1_models.GrandFather:
+			return err("Ancestor error: Father's parent is not GrandFather.")
+			
+		child_repr = child.key().__repr__()
+		
+		logging.info(child_repr)
+		
+		if not ('Father' in child_repr and 'GrandFather' in child_repr):
+			return err('Child key path does not contain both Father and GrandFather.')
+		
+	except:
+		return err('Exception encountered while trying to query ancestor test models.')
 	
 	# Test app2_models
 	try:
