@@ -73,9 +73,9 @@ def populate_datastore(request):
 	# exactly as we want it to be, without duplicate entries, etc. 
 	# (Based on appengine_django.management.commands.flush.py).
 	# Note: requires hack from http://aralbalkan.com/1440 to re-enable os.remove on the local SDK.
-	os.remove = os.old_remove
-	connection.flush()
-	del os.remove
+	# os.remove = os.old_remove
+	# connection.flush()
+	# del os.remove
 		
 	user = users.get_current_user()
 			

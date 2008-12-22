@@ -15,6 +15,12 @@ Functional tests for Gaebar running on Google App Engine Helper-based Django app
 
 IMPORTANT: Make sure you update the GAEBAR_BACKUPS_FOLDER setting in settings.py to point to the gaebar/backups folder on your local machine before running the app.
 
+Note: If you want to run Gaebar-gaed on the Google App Engine deployment environment, don't use the links in the index page (as they are hardcoded for localhost testing), instead hit /populate-datastore, /run-tests, and /gaebar/ directly. Also, you have to comment out the following lines from views.py:
+
+os.remove = os.old_remove
+connection.flush()
+del os.remove
+
 * * * 
 
 

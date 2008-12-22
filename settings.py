@@ -118,6 +118,8 @@ GAEBAR_SECRET_KEY = 'change_this_to_something_random'
 
 GAEBAR_SERVERS = {
      u'Local Test': u'http://localhost:8080',
+     u'Staging': u'gaebar-gaed-staging.appspot.com',
+     u'Deployment': u'http://gaebar-gaed.appspot.com',
      # Other servers...
 }
 
