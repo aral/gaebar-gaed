@@ -19,6 +19,10 @@ from app2 import models as app2_models
 
 from app1 import consts
 
+# Are we running on the local development server?
+IS_DEV = False
+if 'SERVER_SOFTWARE' in os.environ:
+	IS_DEV = os.environ['SERVER_SOFTWARE'].startswith('Dev')
 
 def index(request):
 	response = """<h1>Gaebar Test App for Google App Engine Helper</h1>
@@ -70,12 +74,14 @@ def populate_datastore(request):
 		return HttpResponseRedirect('/?auth=False')
 
 	# Flush the datastore before starting to make sure that the datastore is 
-	# exactly as we want it to be, without duplicate entries, etc. 
+	# exactly as we want it to be, without duplicate entries, etc., when
+	# testing on the local development server.
 	# (Based on appengine_django.management.commands.flush.py).
 	# Note: requires hack from http://aralbalkan.com/1440 to re-enable os.remove on the local SDK.
-	# os.remove = os.old_remove
-	# connection.flush()
-	# del os.remove
+	if IS_DEV:
+		os.remove = os.old_remove
+		connection.flush()
+		del os.remove
 		
 	user = users.get_current_user()
 			
