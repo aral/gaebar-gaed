@@ -119,7 +119,7 @@ def populate_datastore(request):
 	simple = app2_models.Simple()
 	simple.put()
 			
-	return HttpResponse('Successfully populated the datastore.')
+	return HttpResponse('<p>Successfully populated the datastore.</p><p><a href="/">Home</a></p>')
 		
 
 def run_tests(request):
@@ -280,7 +280,7 @@ def run_tests(request):
 
 		return err('Exception raised while trying to test app2_models.')
 	
-	return HttpResponse('All tests ran successfully.')
+	return HttpResponse('<p>All tests ran successfully.</p><p><a href="/">Home</a></p>')
 
 #
 # Helpers
