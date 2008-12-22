@@ -13,9 +13,13 @@ Gebar Google App Engine Helper for Django Test App
 
 Contains functional tests for Gaebar running on Google App Engine.
 
-Note: Ancestor relationships are not supported. Expando properties are not supported. (If you would like to test these out and/or add this functionality before I get round to it, please get in touch!)
+Ancestor relationships are not supported. Quite frankly, I haven't gotten my head around the whole ancestor thing at all. I'm going to look into it again today to see if I can't implement it.
 
-Note: In development.
+Expandos are in the process of being implemented.
+
+Feedback and patches are always welcome! :)
+
+Note: In heavy development.
 
 * * * 
 
