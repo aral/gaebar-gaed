@@ -21,7 +21,10 @@ from app1 import consts
 
 
 def index(request):
-	response = '<h1>Gaebar Test App for Google App Engine Helper</h1>'
+	response = """<h1>Gaebar Test App for Google App Engine Helper</h1>
+	<p>For more info see the <a href="http://github.com/aral/gaebar/tree/master">Gaebar project</a>, <a href="http://code.google.com/p/google-app-engine-django/">Google App Engine Helper</a> (Google App Engine Django), and <a href="http://code.google.com/appengine/">Google App Engine</a>.</p>
+	"""
+	
 	
 	if 'auth' in request.REQUEST:
 		auth = request.REQUEST['auth']
@@ -34,7 +37,7 @@ def index(request):
 		
 		response += """
 			<p><strong>Welcome, administrator!</strong></p>
-			<p>Run local server at http://localhost:8000/. "Remote" server at http://localhost:8080/.</p>
+			<p>Run local server at http://localhost:8000/ and "remote" server at http://localhost:8080/ and follow these steps to run the Gaebar functional tests:</p>
 			<p>
 				<ol>
 					<li><a href="http://localhost:8080/populate-datastore/">Populate the datastore on 8080</a></li>
