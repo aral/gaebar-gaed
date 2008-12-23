@@ -28,6 +28,12 @@ import logging
 from appengine_django import InstallAppengineHelperForDjango
 from appengine_django import have_django_zip
 from appengine_django import django_zip_path
+
+# This works around a Django on Windows issue, as detailed here:
+# http://code.google.com/p/rietveld/issues/detail?id=44
+if os.name == 'nt':  
+  os.unlink = lambda: None
+
 InstallAppengineHelperForDjango()
 
 # Google App Engine imports.
