@@ -13,6 +13,19 @@ Gebar Google App Engine Helper for Django Test App
 
 Functional tests for Gaebar running on Google App Engine Helper-based Django app.
 
+
+SUPPORTED PLATFORMS
+===================
+
+Gaebar-gaed has been tested successfully on the following platforms:
+
+* Mac OS X Leopard 10.5.6 with Python 2.5.1
+* Ubuntu Linux 8.10 with Python 2.5.2
+* Windows Vista with Python 2.6.1
+
+Although best experienced on Firefox, Gaebar has been successfully tested on the latest Firefox, Safari, and Internet Explorer browsers. 
+
+
 INSTALLATION
 ============
 
