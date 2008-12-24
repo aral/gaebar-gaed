@@ -41,6 +41,9 @@ def index(request):
 		
 		response += """
 			<p><strong>Welcome, administrator!</strong></p>
+			<h2>Commands:</h2>
+			<p>| <a href="/flush/">Flush datastore</a> | <a href="/populate-datastore/">Populate datastore</a> | <a href="/run-tests/">Run tests</a> | <a href="/gaebar/">Gaebar</a> |</p>
+			<h2>Testing checklist for localhost:</h2>
 			<p>Run local server at http://localhost:8000/ and "remote" server at http://localhost:8080/ and follow these steps to run the Gaebar functional tests:</p>
 			<p>Note: If you're running this on localhost, the datastore will be flushed automatically before it is populated.</p>
 			<p>
