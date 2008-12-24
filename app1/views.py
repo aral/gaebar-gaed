@@ -42,11 +42,14 @@ def index(request):
 		response += """
 			<p><strong>Welcome, administrator!</strong></p>
 			<p>Run local server at http://localhost:8000/ and "remote" server at http://localhost:8080/ and follow these steps to run the Gaebar functional tests:</p>
+			<p>Note: If you're running this on localhost, the datastore will be flushed automatically before it is populated.</p>
 			<p>
 				<ol>
+					<li><a href="http://localhost:8080/flush/">Flush the datastore on 8080</a> to empty it.</li>
 					<li><a href="http://localhost:8080/populate-datastore/">Populate the datastore on 8080</a></li>
 					<li><a href="http://localhost:8080/run-tests">Run tests on 8080</a></li>
 					<li><a href="http://localhost:8080/gaebar/">Backup datastore from port 8080</a></li>
+					<li><a href="http://localhost:8000/flush/">Flush the datastore on 8000</a> to make sure that it is empty.</li>
 					<li><a href="http://localhost:8000/gaebar/">Restore datastore to port 8000</a></li>
 					<li><a href="http://localhost:8000/run-tests">Run tests on 8000</a></li>
 				</ol>
@@ -326,6 +329,29 @@ def run_tests(request):
 		return err('Exception raised while trying to test app2_models.')
 	
 	return HttpResponse('<p>All tests ran successfully.</p><p><a href="/">Home</a></p>')
+
+def flush_datastore(request):
+	"""
+	Deletes all models in a datastore.
+	
+	Note: This runs in one go and is meant for a small datastore
+	such as the one that comes with this project. Will time out on 
+	larger datastores.
+	
+	"""
+	kind_map = db._kind_map
+
+	for kind in kind_map:
+		Model = kind_map[kind]
+		rows = Model.all().fetch(100)
+		if rows:
+			logging.info('Deleting all rows on model %s.' % kind)
+			for row in rows:
+				row.delete()
+		else:
+			logging.info('%s did not have any rows.' % kind)
+	
+	return HttpResponse('<p>Datastore is empty.</p><p><a href="/">Home</a></p>')
 
 #
 # Helpers
