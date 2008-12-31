@@ -39,9 +39,10 @@ class GoogleAccount(db.Model):
 class AllOtherTypes(db.Model):
 	"""
 	Used to test that all other data types are serialized/deserialized correctly.
+	And also tests required properties.
 	
 	"""
-	string_property = db.StringProperty(default=consts.STRING_PROPERTY)
+	string_property = db.StringProperty(required=True)
 	boolean_property = db.BooleanProperty(default=consts.BOOLEAN_PROPERTY)
 	integer_property = db.IntegerProperty(default=consts.INTEGER_PROPERTY)
 	float_property = db.FloatProperty(default=consts.FLOAT_PROPERTY)
