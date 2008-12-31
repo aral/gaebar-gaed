@@ -122,7 +122,7 @@ def populate_datastore(request):
 	google_account_2.put()	
 	
 	# To test all other properties and required properties.
-	all_types_1 = app1_models.AllOtherTypes(string_property='Required string property with no default.')
+	all_types_1 = app1_models.AllOtherTypes(string_property=consts.STRING_PROPERTY)
 	all_types_1.put()
 	
 	# To test Expando.
