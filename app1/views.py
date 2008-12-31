@@ -48,12 +48,11 @@ def index(request):
 			<p>Note: If you're running this on localhost, the datastore will be flushed automatically before it is populated.</p>
 			<p>
 				<ol>
+				<li><a href="http://localhost:8000/flush/">Flush the datastore on <strong>8000</strong></a> to empty it.</li>
 					<li><a href="http://localhost:8080/flush/">Flush the datastore on 8080</a> to empty it.</li>
 					<li><a href="http://localhost:8080/populate-datastore/">Populate the datastore on 8080</a></li>
 					<li><a href="http://localhost:8080/run-tests">Run tests on 8080</a></li>
-					<li><a href="http://localhost:8080/gaebar/">Backup datastore from port 8080</a></li>
-					<li><a href="http://localhost:8000/flush/">Flush the datastore on 8000</a> to make sure that it is empty.</li>
-					<li><a href="http://localhost:8000/gaebar/">Restore datastore to port 8000</a></li>
+					<li><a href="http://localhost:8080/gaebar/">Backup datastore from port 8080 and restore it to port <strong>8000</strong></a></li>
 					<li><a href="http://localhost:8000/run-tests">Run tests on 8000</a></li>
 				</ol>
 			</p>
