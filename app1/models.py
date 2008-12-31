@@ -33,7 +33,7 @@ class GoogleAccount(db.Model):
 
 	"""
 	user = db.UserProperty()
-	profile = db.ReferenceProperty(Profile, collection_name="google_accounts")
+	profile = db.ReferenceProperty(Profile, collection_name="google_accounts", required=True)
 
 		
 class AllOtherTypes(db.Model):

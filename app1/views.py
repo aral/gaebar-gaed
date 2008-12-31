@@ -109,16 +109,16 @@ def populate_datastore(request):
 	stephanie.in_relationship_with = aral
 	stephanie.put()
 		
-	# Test db.UserProperty and db.ReferenceProperty with regular keys.
-	google_account_1 = app1_models.GoogleAccount()
+	# Test db.UserProperty and db.ReferenceProperty with regular keys. 
+	# Also tests required ReferenceProperty instances.
+	google_account_1 = app1_models.GoogleAccount(profile=aral)
 	google_account_1.user = user
-	google_account_1.profile = aral
 	google_account_1.put()
 
 	# Test db.UserProperty and db.ReferenceProperty with regular keys.
-	google_account_2 = app1_models.GoogleAccount()
+	# Also tests required ReferenceProperty instances.
+	google_account_2 = app1_models.GoogleAccount(profile=stephanie)
 	google_account_2.user = user
-	google_account_2.profile = stephanie
 	google_account_2.put()	
 	
 	# To test all other properties and required properties.
