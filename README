@@ -1,4 +1,4 @@
-Gaebar (Google App Engine Backup and Restore) Beta 2
+Gaebar (Google App Engine Backup and Restore) Beta 3
 ====================================================
 
 A Naklab™ production sponsored by the <head> web conference - http://headconference.com
